@@ -1,0 +1,51 @@
+<!-- indexer::stop -->
+<div class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
+
+  <?php if ($this->headline): ?>
+    <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
+  <?php endif; ?>
+
+	<div class="period_filter">
+		<?php echo $GLOBALS['TL_LANG']['MSC']['startDate']; ?>: <input type="text" id="from" name="from" value="<?php echo $this->filterStart; ?>">
+		<?php echo $GLOBALS['TL_LANG']['MSC']['endDate']; ?>: <input type="text" id="to" name="to" value="<?php echo $this->filterStop; ?>">
+	</div>
+
+  <?php echo $this->events; ?>
+
+</div>
+<!-- indexer::continue -->
+<?php $GLOBALS['TL_CSS'][] = 'system/modules/calendar_periodListFilter/assets/pickdate/themes/classic.css'; ?>
+<?php $GLOBALS['TL_CSS'][] = 'system/modules/calendar_periodListFilter/assets/pickdate/themes/classic.date.css'; ?>
+<script src="system/modules/calendar_periodListFilter/assets/pickdate/legacy.js"></script>
+<script src="system/modules/calendar_periodListFilter/assets/pickdate/picker.js"></script>
+<script src="system/modules/calendar_periodListFilter/assets/pickdate/picker.date.js"></script>
+<script>
+$(function() {
+	var cont = $('.period_filter');
+
+	var filter = function(){
+		var parts;
+		parts = cont.find('input[name=from]').val().split('.');
+		var from = (parts.length == 3) ? new Date(parts[2],parts[1]-1,parts[0]).getTime()/1000 : 0;
+		parts = cont.find('input[name=to]').val().split('.');
+		var to = (parts.length == 3) ? new Date(parts[2],parts[1]-1,parts[0]).getTime()/1000 : Number.MAX_VALUE;
+
+		cont.parent().find('.event[data-tstamp]').each(function(k,el){
+			el=$(el);
+			var ts = parseInt(el.attr('data-tstamp'));
+			if(from<=ts && to>=ts){
+				el.slideDown();
+			} else {
+				el.slideUp();
+			}
+		});
+	};
+
+	cont.find('input[type=text]').pickadate({
+		format: '<?php echo $this->pickerFormat; ?>',
+		onSet: filter
+	});
+
+	filter();
+});
+</script>
