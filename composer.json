@@ -1,0 +1,34 @@
+{
+	"name": "psi/calendar_periodListFilter",
+	"description": "Contao calendar Listing module with javascript filter",
+	"keywords": ["contao"],
+	"type": "contao-module",
+	"homepage": "https://github.com/psi-4ward/calendar_periodListFilter",
+	"license": "LGPL-3.0+",
+	"authors": [
+		{
+			"name": "Christoph Wiechert",
+			"email": "cw@4wardmedia.de",
+			"homepage": "http://4wardmedia.de",
+			"role": "Developer"
+		}
+	],
+	"support": {
+		"email": "cw@4wardmedia.de",
+		"issues": "https://github.com/psi-4ward/calendar_periodListFilter/issues",
+		"forum": "https://community.contao.org/de/forumdisplay.php?110-4ward",
+		"irc": "irc://irc.freenode.org/contao.dev",
+		"source": "https://github.com/psi-4ward/calendar_periodListFilter"
+	},
+	"require": {
+		"php": ">=5.3",
+		"contao/core": "~3.1"
+	},
+	"extra": {
+		"contao": {
+			"symlinks": {
+				".": "system/modules/calendar_periodListFilter"
+			}
+		}
+	}
+}
