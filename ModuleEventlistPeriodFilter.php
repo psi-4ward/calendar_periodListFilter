@@ -24,8 +24,6 @@ class ModuleEventlistPeriodFilter extends \ModuleEventlist
 	{
 		parent::compile();
 
-		echo \Date::formatToJs($GLOBALS['objPage']->dateFormat);
-
 		$this->Template->filterStart = $this->genDate($this->eventlist_start);
 		$this->Template->filterStop  = $this->genDate($this->eventlist_stop);
 		$this->Template->pickerFormat = $this->getJsDateFormat();

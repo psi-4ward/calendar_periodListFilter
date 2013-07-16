@@ -5,4 +5,4 @@
  * @author Christoph Wiechert <wio@psitrax.de>
  */
  
-$GLOBALS['TL_LANG']['FMD']['eventlist_priodfilter'] = 'Eventliste mit Zeitraumfilter';
+$GLOBALS['TL_LANG']['FMD']['eventlist_priodfilter'] = 'Event list filter with period';

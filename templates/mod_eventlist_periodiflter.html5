@@ -13,7 +13,6 @@
   <?php echo $this->events; ?>
 
 </div>
-<!-- indexer::continue -->
 <?php $GLOBALS['TL_CSS'][] = 'system/modules/calendar_periodListFilter/assets/pickdate/themes/classic.css'; ?>
 <?php $GLOBALS['TL_CSS'][] = 'system/modules/calendar_periodListFilter/assets/pickdate/themes/classic.date.css'; ?>
 <script src="system/modules/calendar_periodListFilter/assets/pickdate/legacy.js"></script>
@@ -25,10 +24,17 @@ $(function() {
 
 	var filter = function(){
 		var parts;
-		parts = cont.find('input[name=from]').val().split('.');
-		var from = (parts.length == 3) ? new Date(parts[2],parts[1]-1,parts[0]).getTime()/1000 : 0;
-		parts = cont.find('input[name=to]').val().split('.');
-		var to = (parts.length == 3) ? new Date(parts[2],parts[1]-1,parts[0]).getTime()/1000 : Number.MAX_VALUE;
+		var from = cont.find('input[name=from]').val();
+		var to = cont.find('input[name=to]').val();
+		if(from.indexOf('.')>0) {
+			parts = from.split('.');
+			from = (parts.length == 3) ? new Date(parts[2],parts[1]-1,parts[0]).getTime()/1000 : 0;
+			parts = to.split('.');
+			to = (parts.length == 3) ? new Date(parts[2],parts[1]-1,parts[0]).getTime()/1000 : Number.MAX_VALUE;
+		} else {
+			from = from ? new Date(from).getTime()/1000 : 0;
+			to = to ? new Date(to).getTime()/1000 : Number.MAX_VALUE;
+		}
 
 		cont.parent().find('.event[data-tstamp]').each(function(k,el){
 			el=$(el);
@@ -49,3 +55,4 @@ $(function() {
 	filter();
 });
 </script>
+<!-- indexer::continue -->
